@@ -1,10 +1,12 @@
 package ar.edu.unq.poo2.tp2Empresas;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Empresa {
 	private int cuit;
 	private String nombre;
-	private List<Empleado> listaDeEmpleados = new ArrayList<Empleado>();
+	public List<Empleado> listaDeEmpleados = new ArrayList<Empleado>();
+	public List<String> listaDeRecibos = new ArrayList <String>();
 	
 	public Empresa() {
 		super();
@@ -28,11 +30,7 @@ public class Empresa {
 		this.cuit = cuit;
 	}
 	
-	public String getNombre() {
-		return nombre;
-	}
-	
-	
+
 	public float getTotalSueldosNetos() {
 		float montoTotal = 0;
 		
@@ -43,6 +41,44 @@ public class Empresa {
 		return montoTotal;
 	}
 	
+	public float getTotalSueldosBrutos() {
+		float montoTotal = 0;
+		
+		for (Empleado empleado : listaDeEmpleados) {
+			montoTotal = montoTotal + empleado.getSueldoBruto();
+		}
+		
+		return montoTotal;
+		
+	}
+	
+	public float getTotalDeRetenciones() {
+		float montoTotal = 0;
+		
+		for (Empleado empleado : listaDeEmpleados) {
+			montoTotal = montoTotal + empleado.getRetenciones();
+		}
+		
+		return montoTotal ;
+				
+	}
+	
+	public void realizarLiquidacionDeSueldos() {
+		
+		for (Empleado empleado : listaDeEmpleados) {
+			listaDeRecibos.add(getRecibo(empleado , LocalDate.now()));
+		}
+		
+	}
+	
+	
+	public String getRecibo(Empleado unEmpleado, LocalDate fechaDeEmision) {
+		
+		return 
+		new ReciboDeHaberes(unEmpleado, fechaDeEmision).getReciboDeEmpleado();
+	}
+	
+
 	
 	
 	

@@ -10,22 +10,22 @@ public abstract class Empleado {
 	private float sueldoBasico;
 	
 	public Empleado() {
-		super();
+		
 	}
 	
 	public Empleado(String nombre, String direccion, String estadoCivil,
 								LocalDate fechaDeNacimiento, float sueldoBasico){
-		this.setNombre(nombre);
-		this.setDireccion(direccion);
-		this.setEstadoCivil(estadoCivil);
+		this.nombre= nombre;
+		this.direccion = direccion;
+		this.estadoCivil = estadoCivil;
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.sueldoBasico = sueldoBasico;
 				
 	}
 	
 	public abstract float getSueldoBruto();
-	public abstract float getSueldoNeto();
-	
+	public abstract float getRetenciones(); 
+	public abstract String getConceptos();
 	
 	
 	public int edad(LocalDate fechaNacimiento) {
@@ -66,5 +66,13 @@ public abstract class Empleado {
 		this.estadoCivil = estadoCivil;
 	}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+	public float getSueldoNeto(){
+		return (getSueldoBruto() - getRetenciones());
+	}
+	
+
+	
+	
+	
 	
 }

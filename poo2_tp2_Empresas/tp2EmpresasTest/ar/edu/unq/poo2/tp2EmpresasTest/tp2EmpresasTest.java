@@ -1,6 +1,8 @@
 package ar.edu.unq.poo2.tp2EmpresasTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ar.edu.unq.poo2.tp2Empresas.*;
@@ -28,25 +30,53 @@ class tp2EmpresasTest {
 				 true
 	);
 	
+	private Empleado empleadoContratado = new Contratado("Jorge",
+			 "Alicia Moreau 875",
+			 "casado",
+			 LocalDate.of(1985, 10, 27),														
+			 600,
+			 788955,
+			 "Banco Nacion");
 	
 	public Empresa empresa1 = new Empresa(30456789, "POO2 SRL" );
 	
-	
-	@Test
-	void test_tieneNombre() {
-		assertEquals(empresa1.getNombre(), "POO2 SRL");
-	}
-	
-	
-	@Test 
-	void test_tieneUnaListaDeEmpleados() {
+	private void setUp(){
 		empresa1.agregarEmpleado(empleadoPermanente);
 		empresa1.agregarEmpleado(empleadoTemporal);	
+		empresa1.agregarEmpleado(empleadoContratado);
 	}
+	
+	@Test
+	void testListadeEmpleados() {
+		setUp();
+		empresa1.realizarLiquidacionDeSueldos();
+		System.out.print(empresa1.getRecibo(empleadoPermanente, LocalDate.now() ));
+	}
+	
+	
+
 	
 	@Test
 	void test_calcularTotalDeSueldosNetos(){
+		setUp();
 		empresa1.getTotalSueldosNetos();
 	}
+	
+	@Test
+	void test_calcularTotalDeSueldosBrutos() {
+		setUp();
+		empresa1.getTotalSueldosBrutos();
+	}
+	
+	@Test 
+	void test_calcularTotalDeRetenciones() {
+		setUp();
+		empresa1.getTotalDeRetenciones();
+	}
+	
+	
 
+	
+	
+	
 }

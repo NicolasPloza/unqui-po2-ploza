@@ -10,20 +10,18 @@ public class Temporal extends Empleado {
 	private float sueldoBasico;
 	private LocalDate fechaFinDeDesignacion;
 	private int cantHorasExtra;
-	private float sueldoBruto ;
 	
 	
 	public Temporal() {
-		super();
+		
 	}
 	
 	public Temporal(String nombre, String direccion, String estadoCivil,
-				LocalDate fechaDeNacimiento, float sueldoBasico, LocalDate fechaFinDeDesignacion, 
+			LocalDate fechaDeNacimiento,float sueldoBasico, LocalDate fechaFinDeDesignacion, 
 				int cantHorasExtra){
-		
-		this.nombre = nombre;
+		this.nombre= nombre;
 		this.direccion = direccion;
-		this.estadoCivil=estadoCivil;
+		this.estadoCivil = estadoCivil;
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.sueldoBasico = sueldoBasico;
 		this.fechaFinDeDesignacion = fechaFinDeDesignacion;
@@ -32,22 +30,22 @@ public class Temporal extends Empleado {
 	
 	
 	public float getSueldoBruto() {
-		sueldoBruto = sueldoBasico + (cantHorasExtra*40);
-		return sueldoBruto;
-	}
-	
-	public float getSueldoNeto() {
-	
-		return (sueldoBruto - this.getRetenciones());
+		return (sueldoBasico + (cantHorasExtra*40));
+		
 	}
 	
 	public float getRetenciones() {
-		return (float)((sueldoBruto*0.1) + this.extraDeObraSocialPorEdad() + this.aportesJubilatorios());  
+		return obraSocial() + aportesJubilatorios();  
+	}
+	
+	
+	public float obraSocial() {
+		return (float)(getSueldoBruto()*0.1 + extraDeObraSocialPorEdad());
 	}
 	
 	private float extraDeObraSocialPorEdad() {
 		float extraPorEdad;
-		if (this.edad(fechaDeNacimiento) > 50) {
+		if (edad(fechaDeNacimiento) > 50) {
 			extraPorEdad = 25;
 		}
 		else {
@@ -57,8 +55,16 @@ public class Temporal extends Empleado {
 		return extraPorEdad;
 	}
 	
-	private float aportesJubilatorios() {
-		return (float)(sueldoBruto * 0.1 + cantHorasExtra*5); 
+	public float aportesJubilatorios() {
+		return (float)(getSueldoBruto() * 0.1 + cantHorasExtra*5); 
+	}
+	
+	public String getConceptos() {
+		return "\nSueldo Basico: $" + sueldoBasico +
+			"\nHoras extra: $" + (cantHorasExtra*40) + 
+			"\n\nRetenciones:\n "
+			+ "Obra social: $" + obraSocial() +
+		   "\n Aportes jubilatorios: $" + aportesJubilatorios()+ "\n\n\n";
 	}
 	
 

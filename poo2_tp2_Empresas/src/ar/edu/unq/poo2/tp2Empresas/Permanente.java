@@ -12,43 +12,44 @@ public class Permanente extends Empleado {
 	private int antiguedad;
 	private int cantHijos;
 	private boolean tieneConyugue;
-	private float salarioFamiliar = this.asignacionPorConyugue() + 
-									this.asignacionPorHijo()+ this.extraPorAntiguedad(); 
-	private float sueldoBruto ;
+	
 	
 	public Permanente() {
-		super();
+		
 	}
 	
+
 	public Permanente(String nombre, String direccion, String estadoCivil,
-				LocalDate fechaDeNacimiento, float sueldoBasico, int antiguedad, 
-				int cantHijos, boolean tieneConyugue){
-		
-		this.nombre = nombre;
+			LocalDate fechaDeNacimiento,float sueldoBasico,int antiguedad, int cantHijos, boolean tieneConyugue){
+		this.nombre= nombre;
 		this.direccion = direccion;
-		this.estadoCivil=estadoCivil;
+		this.estadoCivil = estadoCivil;
 		this.fechaDeNacimiento = fechaDeNacimiento;
-		this.sueldoBasico = sueldoBasico;
 		this.antiguedad = antiguedad;
 		this.cantHijos = cantHijos;
 		this.tieneConyugue = tieneConyugue;
 	}
 	
+	
 	public float getSueldoBruto() {
-		sueldoBruto = sueldoBasico + salarioFamiliar;
-		return sueldoBruto;
+		return ( sueldoBasico + getSalarioFamiliar());
+		
 	}
 	
-	public float getSueldoNeto() {
-		return sueldoBruto - this.getRetenciones();
+	private float getSalarioFamiliar() {
+		return asignacionPorConyugue() + asignacionPorHijo() + extraPorAntiguedad(); 
 	}
 	
 	public float getRetenciones() {
-		return (float)(sueldoBruto*0.1 + cantHijos*20)+ this.aportesJubilatorios();
+		return obraSocial() + aportesJubilatorios();  
+	}
+
+	public float obraSocial() {
+		return (float)(getSueldoBruto() / 10 + cantHijos*20);
 	}
 	
-	private float aportesJubilatorios() {
-		return (float) (sueldoBruto * 0.1) ;
+	public float aportesJubilatorios() {
+		return (float) (getSueldoBruto() * 0.15) ;
 	}
 	
 	
@@ -76,16 +77,15 @@ public class Permanente extends Empleado {
 	}
 	
 	
-	/*
-	 *Sueldo Basico 
-	 *Salario Familiar, que se compone de:
- 		 Asignación por hijo: $150 por cada hijo.
- 		 Asignación por cónyuge: $100 si tiene cónyuge 
- 		 Antigüedad: $50 por cada año de antigüedad.
- 	 
- 	 *Las retenciones que se realizan a este empleado son:
-      	 Obra Social: 10% de su sueldo bruto + $20 por cada hijo. 
-      	 Aportes Jubilatorios: 15% de su sueldo bruto
-	 * */
+	public String getConceptos() {
+		return "\nSueldo básico: $" + sueldoBasico +
+			"\nAsginación por hijo:  $" + asignacionPorHijo() +
+			"\nAsignacion por conyugue: $" + asignacionPorConyugue() + 
+			"\n \nRetenciones; \n"
+			+  " ObraSocial: $" + this.obraSocial() + 
+			 "\n Aportes Jubilatorios: $" + aportesJubilatorios()+"\n\n\n";
+	}
+	
+
 
 }

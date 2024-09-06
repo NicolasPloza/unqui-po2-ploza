@@ -1,6 +1,8 @@
 package ar.edu.unq.poo2.tp2EmpresasTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.SystemColor;
 import java.time.*;
 
 import org.junit.jupiter.api.Test;
@@ -17,15 +19,23 @@ class tp2EmpleadoTest {
 													 48
 	);  
 	
-	private Empleado empleadoPermanente = new Permanente("Alan", 
-														 "av.Alvear 478, CABA", 
-														 "soltero", LocalDate.of(1999, 6, 19) , 
-														 10000, 
-														 15, 
-														 2, 
-														 true
-	);  
+	private Empleado empleadoPermanente = new Permanente("Alan", //nombre
+			 "av.Alvear 478, CABA", //dir
+			 "soltero", LocalDate.of(1999, 6, 19) , 
+			 10000, //sueldo basico
+			 15,   //años de antiguedad
+			 2,    //cantidad de hijos
+			 true  //tiene conyugue?
+);  
   
+	private Empleado empleadoContratado = new Contratado("Jorge",
+														 "Alicia Moreau 875",
+														 "casado",
+														 LocalDate.of(1985, 10, 27),														
+														 600,
+														 788955,
+														 "Banco Nacion");
+			
 	
 	@Test
 	void test_calcularEdad() {		
@@ -41,6 +51,18 @@ class tp2EmpleadoTest {
 	@Test
 	void test_PermanenteCalculaSuSueldoBruto() {
 		empleadoPermanente.getSueldoBruto();
+	}
+	
+	@Test
+	void test_ContratadoCalculaSuSueldoBruto() {
+		empleadoContratado.getSueldoBruto();
+	}
+	
+	@Test
+	void test_conceptos() {
+		System.out.print(empleadoTemporal.getConceptos());
+		System.out.print(empleadoPermanente.getConceptos());
+		System.out.print(empleadoContratado.getConceptos());
 	}
 	
 
