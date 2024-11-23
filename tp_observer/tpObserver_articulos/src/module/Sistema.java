@@ -14,6 +14,7 @@ public class Sistema {
 	public void agregarArticulo(Articulo articulo) {
 		
 		this.getArticulos().add(articulo);
+		this.notificar(articulo);
 	}
 
 	public List<Articulo> getArticulos() {
@@ -26,7 +27,7 @@ public class Sistema {
 		return this.interesados;
 	}
 
-	public void suscribir(Investigador investigador, Interes interes) {
+	public void suscribir(Investigador investigador, Campo interes) {
 		
 		investigador.agregarInteres(interes);
 		this.getInteresados().add(investigador);

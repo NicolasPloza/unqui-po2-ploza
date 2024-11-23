@@ -7,10 +7,10 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="C:/Users/cbello/Documents/ED_Practica_1/mockitoArchivos/byte-buddy-1.14.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/cbello/Documents/ED_Practica_1/mockitoArchivos/byte-buddy-agent-1.14.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/cbello/Documents/ED_Practica_1/mockitoArchivos/mockito-core-5.11.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/cbello/Documents/ED_Practica_1/mockitoArchivos/objenesis-3.3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/Compumar/Desktop/Nico/Facultad-UNQ/POO II/libreriaMockito/byte-buddy-1.14.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Compumar/Desktop/Nico/Facultad-UNQ/POO II/libreriaMockito/byte-buddy-agent-1.14.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Compumar/Desktop/Nico/Facultad-UNQ/POO II/libreriaMockito/mockito-core-5.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Compumar/Desktop/Nico/Facultad-UNQ/POO II/libreriaMockito/objenesis-3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

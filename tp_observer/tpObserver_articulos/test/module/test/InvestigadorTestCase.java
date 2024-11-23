@@ -27,7 +27,7 @@ class InvestigadorTestCase {
 	@Test
 	void test_unInvestigadorAgregaUnInteresASuLista(){
 		//setup
-		Interes interes = mock(Interes.class);
+		Campo interes = mock(Campo.class);
 		
 		//exercise
 		investigador.agregarInteres(interes);
@@ -38,26 +38,22 @@ class InvestigadorTestCase {
 	}
 	
 	@Test
-	void test_unInvestigadorRecibeMailSoloDeArticulosDeInteres(){
+	void test_unInvestigadorActualizaArticuloSoloSiCumpleSusIntereses(){
 		//setup
-		Interes interes1 = mock(Interes.class);
-		Interes interes2 = mock(Interes.class);
-		Articulo articuloDeInteres = mock(Articulo.class);
-		Articulo articuloFueraDeInteres = mock(Articulo.class);
+		Campo interes1 = mock(Campo.class);
+		Campo interes2 = mock(Campo.class);
+		Articulo articulo = mock(Articulo.class);
+		
 		investigador.agregarInteres(interes1);
 		investigador.agregarInteres(interes2);	
 		
 		//exercise
-		investigador.update(articuloDeInteres);
-		investigador.update(articuloFueraDeInteres);
+		investigador.update(articulo);
 		
-
-		//verify
-		verify(interes1).esDeInteres(articuloDeInteres);
-		verify(interes1).esDeInteres(articuloFueraDeInteres);
-		verify(interes2).esDeInteres(articuloDeInteres);
-		verify(interes2).esDeInteres(articuloFueraDeInteres);
-		
+		//verify 
+		verify(interes1).esDeInteres(articulo);
+		verify(interes2).esDeInteres(articulo);
+	
 	}
 	
 

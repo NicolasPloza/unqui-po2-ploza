@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Investigador {
 
-	private List<Interes> intereses;
+	private List<Campo> intereses;
 	private String email;
 	private MailSender mailSender;
 	
@@ -13,7 +13,7 @@ public class Investigador {
 		this.mailSender = new MailSender();
 	}
 	
-	public void agregarInteres(Interes interes) {
+	public void agregarInteres(Campo interes) {
 		
 		this.getIntereses().add(interes);
 	}
@@ -34,7 +34,7 @@ public class Investigador {
 					.anyMatch( i -> i.esDeInteres(articulo));
 	}
 
-	public List<Interes> getIntereses() {
+	public List<Campo> getIntereses() {
 		// TODO Auto-generated method stub
 		return this.intereses;
 	}
@@ -48,5 +48,8 @@ public class Investigador {
 		// TODO Auto-generated method stub
 		return this.mailSender;
 	}
-
+	
+	public void setMailSender(MailSender mailsender) {
+		this.mailSender = mailsender;
+	}
 }
