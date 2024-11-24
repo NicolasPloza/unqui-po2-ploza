@@ -85,28 +85,7 @@ class FiltroDeNotificacionTestCase {
 	}
 	
 	@Test
-	void test_actualizaUnDeporteDeInteres_soloSiEstaSuscripto() {
-		//setup
-		Partido partidoDeInteres = mock(Partido.class);
-		Partido partidoFueraDeInteres = mock(Partido.class);
-		when(partidoDeInteres.getDeporte()).thenReturn("futbol");
-		when(partidoFueraDeInteres.getDeporte()).thenReturn("tennis");
-		
-		filtro.agregarDeporte("futbol");
-		
-		//exercise
-		filtro.actualizarDeporte(partidoDeInteres);
-		filtro.actualizarDeporte(partidoFueraDeInteres);
-		
-		//verify
-		verify(filtro.getInteresado()).actualizarDeporte(partidoDeInteres);
-		verify(filtro.getInteresado(),never()).actualizarDeporte(partidoFueraDeInteres);
-		
-		
-	}
-	
-	@Test
-	void test_actualizaUnContrincanteDeInteres_soloSiEstaSuscripto() {
+	void test_actualizaUnPartido_soloSiEstaSuscriptoSuInteresado() {
 		//setup
 		Partido partidoDeInteres = mock(Partido.class);
 		Partido partidoFueraDeInteres = mock(Partido.class);
@@ -118,21 +97,28 @@ class FiltroDeNotificacionTestCase {
 		contrincantesFueraDeInteres.add("independiente");
 		contrincantesFueraDeInteres.add("lanus");
 		
+		when(partidoDeInteres.getDeporte()).thenReturn("futbol");
 		when(partidoDeInteres.getContrincantes()).thenReturn(contrincantesDeInteres);
+		
+		when(partidoFueraDeInteres.getDeporte()).thenReturn("tennis");
 		when(partidoFueraDeInteres.getContrincantes()).thenReturn(contrincantesFueraDeInteres);
 		
+		filtro.agregarDeporte("futbol");
+		filtro.agregarDeporte("bascket");
 		filtro.agregarContrincante("racing");
-		filtro.agregarContrincante("river");
 		
 		//exercise
-		filtro.actualizarContrincante(partidoDeInteres);
-		filtro.actualizarContrincante(partidoFueraDeInteres);
+		filtro.update(partidoDeInteres);
+		filtro.update(partidoFueraDeInteres);
 		
 		//verify
-		verify(filtro.getInteresado()).actualizarContrincante(partidoDeInteres);
-		verify(filtro.getInteresado(),never()).actualizarContrincante(partidoFueraDeInteres);
-			
+		verify(filtro.getInteresado()).update(partidoDeInteres);
+		verify(filtro.getInteresado(),never()).update(partidoFueraDeInteres);
+		
 	}
+
+	
+
 	
 	@Test
 	void test_seConoceSiUnInteresadoPerteneceAlFiltroDeNOtificacion() {

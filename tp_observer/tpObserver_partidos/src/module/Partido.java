@@ -17,4 +17,9 @@ public class Partido {
 		return null;
 	}
 
+	public boolean tieneContrincante(String contrincante) {
+		
+		return this.getContrincantes().contains(contrincante);
+	}
+
 }

@@ -48,28 +48,43 @@ public class FiltroDeNotificacion implements Interesado {
 		this.getDeportesDeInteres().remove(deporte);
 	}
 	
-	public void actualizarDeporte(Partido partido) {
-		if( getDeportesDeInteres().contains(partido.getDeporte())) {
-			this.getInteresado().actualizarDeporte(partido);
+	public void update(Partido partido) {
+		if(tieneDeporteDeInteres(partido) || tieneContrincanteDeInteres(partido) ) {
+			this.getInteresado().update(partido);
 		}
 	}
-
-	public void actualizarContrincante(Partido partidoDeInteres) {
-		
-		if( this.tieneContrincanteDeInteres(partidoDeInteres.getContrincantes() )  ) {
-			this.getInteresado().actualizarContrincante(partidoDeInteres);
-		}
-		
+	
+	
+	public boolean tieneDeporteDeInteres(Partido partido) {
+		return getDeportesDeInteres().contains(partido.getDeporte());
 	}
+	
+	
 
-	private boolean tieneContrincanteDeInteres(Set<String> contrincantes) {
+	public boolean tieneContrincanteDeInteres(Partido partido) {
 		
-		return this.getContrincantesDeInteres().stream().anyMatch( c -> contrincantes.contains(c) );
+		return this.getContrincantesDeInteres().stream().anyMatch( c -> partido.tieneContrincante(c) );
 	}
 
 	public boolean tieneInteresado(Interesado interesado) {
 		
 		return this.getInteresado().equals(interesado);
+	}
+
+	public boolean tieneInteresEnDeporte(String deporte) {
+		
+		return this.getDeportesDeInteres().contains(deporte);
+	}
+
+	public boolean tieneIntereses() {
+		
+		return !( this.getDeportesDeInteres().isEmpty() 
+				&& this.getContrincantesDeInteres().isEmpty() ) ;
+	}
+
+	public boolean tieneInteresEnContrincante(String contrincante) {
+		
+		return this.getContrincantesDeInteres().contains(contrincante);
 	}
 	
 }
