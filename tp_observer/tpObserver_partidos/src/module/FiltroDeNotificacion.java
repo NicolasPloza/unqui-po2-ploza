@@ -66,5 +66,10 @@ public class FiltroDeNotificacion implements Interesado {
 		
 		return this.getContrincantesDeInteres().stream().anyMatch( c -> contrincantes.contains(c) );
 	}
+
+	public boolean tieneInteresado(Interesado interesado) {
+		
+		return this.getInteresado().equals(interesado);
+	}
 	
 }

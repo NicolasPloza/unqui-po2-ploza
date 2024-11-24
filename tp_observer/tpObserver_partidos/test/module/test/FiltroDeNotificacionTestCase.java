@@ -131,9 +131,24 @@ class FiltroDeNotificacionTestCase {
 		//verify
 		verify(filtro.getInteresado()).actualizarContrincante(partidoDeInteres);
 		verify(filtro.getInteresado(),never()).actualizarContrincante(partidoFueraDeInteres);
-		
-		
+			
 	}
+	
+	@Test
+	void test_seConoceSiUnInteresadoPerteneceAlFiltroDeNOtificacion() {
+		//setup
+		Interesado app = mock(Interesado.class);
+		
+		//exercise
+		filtro.tieneInteresado(servidor);
+		
+		//verify
+		assertFalse(filtro.tieneInteresado(app));
+		assertTrue(filtro.tieneInteresado(servidor));
+	}
+	
+	
+	
 	
 	
 	
